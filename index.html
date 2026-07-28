@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Education Teachers Conclave — STEMpedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12163A;
+    --ink-soft:#2B3070;
+    --paper:#FFFFFF;
+    --paper-tint:#F5F6FC;
+    --cyan:#00B4D8;
+    --orange:#FF6B35;
+    --mint:#06D6A0;
+    --violet:#9B5DE5;
+    --line:#E3E5F2;
+    --muted:#5A5F86;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  section{padding:96px 0;}
+  @media(max-width:720px){ section{padding:64px 0;} .wrap{padding:0 20px;} }
+
+  /* ---------- Block shape (signature motif) ---------- */
+  .block{
+    position:relative;
+    border-radius:14px;
+  }
+  .block::before{
+    content:"";
+    position:absolute;
+    top:-11px; left:28px;
+    width:34px; height:16px;
+    background:inherit;
+    border-radius:8px 8px 0 0;
+  }
+  .block-notch-right::after{
+    content:"";
+    position:absolute;
+    top:22px; right:-9px;
+    width:16px; height:22px;
+    background:inherit;
+    border-radius:0 8px 8px 0;
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1160px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.05rem;}
+  .brand-mark{width:26px; height:26px; border-radius:7px; background:linear-gradient(135deg,var(--cyan),var(--violet)); flex-shrink:0;}
+  .nav-links{display:flex; gap:32px; font-size:0.92rem; font-weight:500; color:var(--muted);}
+  .nav-cta{
+    background:var(--ink); color:#fff; padding:10px 20px; border-radius:8px;
+    font-weight:600; font-size:0.88rem;
+  }
+  @media(max-width:720px){ .nav-links{display:none;} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink);
+    color:#fff;
+    padding:110px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; position:relative; z-index:2;}
+  @media(max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
+  .hero .eyebrow{color:var(--cyan);}
+  .hero h1{font-size:clamp(2.4rem,4.6vw,3.6rem); font-weight:700; line-height:1.07; margin:18px 0 22px; color:#fff;}
+  .hero h1 em{font-style:normal; color:var(--orange);}
+  .hero p.sub{font-size:1.08rem; color:#C5C9E8; max-width:520px; margin-bottom:34px;}
+  .hero-meta{display:flex; gap:28px; margin-bottom:36px; flex-wrap:wrap;}
+  .hero-meta div{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:#9AA1C4;}
+  .hero-meta strong{display:block; color:#fff; font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; margin-top:2px;}
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:14px 28px; border-radius:9px; font-weight:700; font-size:0.95rem;
+    transition:transform 0.15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--orange); color:#fff;}
+  .btn-ghost{border:1.5px solid #454B85; color:#fff;}
+
+  .hero-blocks{position:relative; height:380px;}
+  .hb{
+    position:absolute;
+    padding:18px 20px;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:0.85rem;
+    color:#fff;
+    box-shadow:0 18px 34px rgba(0,0,0,0.35);
+  }
+  .hb1{background:var(--cyan); top:0; left:20px; width:250px;}
+  .hb2{background:var(--orange); top:110px; left:70px; width:230px;}
+  .hb3{background:var(--mint); top:220px; left:10px; width:260px; color:#0B3B2E;}
+  .hb4{background:var(--violet); top:300px; left:110px; width:200px;}
+
+  /* ---------- Stat strip ---------- */
+  .stats{background:var(--paper-tint); border-bottom:1px solid var(--line); border-top:1px solid var(--line);}
+  .stats .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:44px 32px;}
+  @media(max-width:720px){ .stats .wrap{grid-template-columns:1fr 1fr;} }
+  .stat b{display:block; font-family:'Fraunces',serif; font-size:2.1rem; color:var(--ink);}
+  .stat span{font-size:0.82rem; color:var(--muted); font-weight:500;}
+
+  /* ---------- Goals ---------- */
+  .goals-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
+  @media(max-width:820px){ .goals-grid{grid-template-columns:1fr;} }
+  .goal-card{
+    background:var(--paper-tint);
+    padding:34px 28px 28px;
+    border:1px solid var(--line);
+  }
+  .goal-card .num{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--cyan); font-size:0.85rem;}
+  .goal-card h3{font-size:1.28rem; margin:12px 0 10px; font-weight:600;}
+  .goal-card p{color:var(--muted); font-size:0.94rem;}
+
+  .section-head{max-width:640px;}
+  .section-head .eyebrow{color:var(--orange);}
+  .section-head h2{font-size:clamp(1.8rem,3.2vw,2.4rem); font-weight:600; margin:12px 0 14px;}
+  .section-head p{color:var(--muted); font-size:1.02rem;}
+
+  /* ---------- Agenda (signature: snapping blocks) ---------- */
+  .agenda{background:var(--ink); color:#fff;}
+  .agenda .section-head h2{color:#fff;}
+  .agenda .section-head p{color:#A9AEDA;}
+  .day-tabs{display:flex; gap:10px; margin:40px 0 34px;}
+  .day-tab{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:0.85rem;
+    padding:11px 20px; border-radius:8px; border:1.5px solid #454B85; color:#C5C9E8; cursor:pointer;
+    background:transparent;
+  }
+  .day-tab.active{background:var(--cyan); border-color:var(--cyan); color:var(--ink);}
+  .day-panel{display:none;}
+  .day-panel.active{display:flex; flex-direction:column; gap:0;}
+  .agenda-block{
+    display:grid; grid-template-columns:120px 1fr; gap:24px;
+    padding:22px 26px; margin-bottom:14px; margin-left:0;
+    color:var(--ink);
+  }
+  .agenda-block time{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:0.82rem; color:var(--ink-soft); align-self:center;}
+  .agenda-block h4{font-size:1.05rem; font-weight:600; margin-bottom:5px;}
+  .agenda-block p{font-size:0.88rem; color:var(--muted);}
+  .ab-cyan{background:var(--cyan);}
+  .ab-orange{background:var(--orange); color:#fff;}
+  .ab-orange h4, .ab-orange p, .ab-orange time{color:#fff;}
+  .ab-mint{background:var(--mint);}
+  .ab-violet{background:var(--violet); color:#fff;}
+  .ab-violet h4, .ab-violet p, .ab-violet time{color:#fff;}
+  @media(max-width:600px){ .agenda-block{grid-template-columns:1fr; gap:6px;} }
+
+  /* ---------- Takeaways ---------- */
+  .takeaway-row{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
+  @media(max-width:820px){ .takeaway-row{grid-template-columns:1fr;} }
+  .takeaway{border:1px solid var(--line); padding:30px 26px;}
+  .takeaway .dot{width:38px; height:38px; border-radius:9px; margin-bottom:18px;}
+  .takeaway h3{font-size:1.12rem; font-weight:600; margin-bottom:8px;}
+  .takeaway p{font-size:0.92rem; color:var(--muted);}
+
+  /* ---------- Who should attend ---------- */
+  .attend{background:var(--paper-tint);}
+  .attend-row{display:flex; gap:16px; flex-wrap:wrap; margin-top:36px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:0.85rem; font-weight:600;
+    padding:12px 20px; border-radius:8px; background:#fff; border:1.5px solid var(--line);
+  }
+
+  /* ---------- Testimonials ---------- */
+  .quote-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;}
+  @media(max-width:900px){ .quote-grid{grid-template-columns:1fr;} }
+  .quote{border-left:3px solid var(--orange); padding-left:20px;}
+  .quote p{font-size:0.98rem; color:var(--ink); margin-bottom:14px; font-style:italic;}
+  .quote span{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--muted);}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-top:1px solid var(--line); padding:22px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item summary{font-weight:600; cursor:pointer; font-size:1.02rem; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; font-size:1.4rem; color:var(--muted); font-weight:400;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin-top:12px; color:var(--muted); font-size:0.94rem; max-width:640px;}
+
+  /* ---------- Final CTA ---------- */
+  .cta-final{background:var(--ink); color:#fff; text-align:center;}
+  .cta-final h2{color:#fff; font-size:clamp(1.9rem,3.6vw,2.7rem); font-weight:600; max-width:700px; margin:0 auto 18px;}
+  .cta-final p{color:#A9AEDA; max-width:520px; margin:0 auto 34px;}
+
+  footer{background:#0D1030; color:#8B90BA; padding:44px 0; font-size:0.85rem;}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="brand-mark"></span>STEMpedia</div>
+    <div class="nav-links">
+      <a href="#agenda">Agenda</a>
+      <a href="#takeaways">What you'll get</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#register" class="nav-cta">Reserve a Seat</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">3-Day Conclave · For Indian School Educators</div>
+      <h1>Teach the subject that's <em>rewriting</em> every classroom.</h1>
+      <p class="sub">A hands-on conclave where teachers, principals and school leaders learn to bring AI and Coding into their classrooms with PictoBlox — no prior coding background needed.</p>
+      <div class="hero-meta">
+        <div>DATES<strong>3 Days · This Academic Year</strong></div>
+        <div>FORMAT<strong>In-Person + Live Demos</strong></div>
+        <div>SEATS<strong>Limited to First 300</strong></div>
+      </div>
+      <div class="btn-row">
+        <a href="#register" class="btn btn-primary">Reserve Your Seat</a>
+        <a href="#agenda" class="btn btn-ghost">See the Agenda</a>
+      </div>
+    </div>
+    <div class="hero-blocks">
+      <div class="hb block hb1">01 — Discover AI & Coding</div>
+      <div class="hb block hb2">02 — Build With PictoBlox</div>
+      <div class="hb block hb3">03 — Take It To Your Classroom</div>
+      <div class="hb block hb4">04 — Get Certified</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>4,000+</b><span>Educators already trained by STEMpedia</span></div>
+    <div class="stat"><b>500K+</b><span>Students impacted across 50+ projects</span></div>
+    <div class="stat"><b>CBSE·ICSE</b><span>Aligned curriculum, grades 1–10</span></div>
+    <div class="stat"><b>3 Days</b><span>Of hands-on, no-code-required learning</span></div>
+  </div>
+</div>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why this conclave</div>
+      <h2>Three things we set out to do</h2>
+      <p>Every session, demo and conversation across the three days works toward these.</p>
+    </div>
+    <div class="goals-grid">
+      <div class="goal-card block" style="background:var(--paper-tint);">
+        <div class="num">01</div>
+        <h3>Introduce educators to AI</h3>
+        <p>Give teachers, principals and decision-makers real, hands-on time with our AI & coding platform — not just a pitch.</p>
+      </div>
+      <div class="goal-card block" style="background:var(--paper-tint);">
+        <div class="num">02</div>
+        <h3>Build lasting trust</h3>
+        <p>Establish STEMpedia as a name Indian schools recognise and trust when they think about AI and coding education.</p>
+      </div>
+      <div class="goal-card block" style="background:var(--paper-tint);">
+        <div class="num">03</div>
+        <h3>Start next year's rollout</h3>
+        <p>Turn conversations into commitments — schools ready to bring AI and coding into their curriculum next academic year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="agenda" id="agenda">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The agenda</div>
+      <h2>Three days, snapped together</h2>
+      <p>Each day builds on the last — just like a block-coding sequence.</p>
+    </div>
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="showDay(1,this)">Day 1</button>
+      <button class="day-tab" onclick="showDay(2,this)">Day 2</button>
+      <button class="day-tab" onclick="showDay(3,this)">Day 3</button>
+    </div>
+
+    <div class="day-panel active" id="day1">
+      <div class="agenda-block block block-notch-right ab-cyan">
+        <time>09:30 AM</time>
+        <div><h4>Why AI & Coding, Why Now</h4><p>Setting the context — how AI is entering Indian classrooms and where teachers fit in.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-orange">
+        <time>11:30 AM</time>
+        <div><h4>First Look at PictoBlox</h4><p>A guided, block-based introduction — build your first AI project with zero prior coding.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-mint">
+        <time>02:30 PM</time>
+        <div><h4>Classroom Case Studies</h4><p>How schools across India have already brought coding and AI into their timetables.</p></div>
+      </div>
+    </div>
+
+    <div class="day-panel" id="day2">
+      <div class="agenda-block block block-notch-right ab-violet">
+        <time>09:30 AM</time>
+        <div><h4>Hands-On: Build an AI Model</h4><p>Train a simple machine learning model live, using real classroom-ready examples.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-cyan">
+        <time>12:00 PM</time>
+        <div><h4>Robotics & IoT Add-On</h4><p>See how coding projects extend into robotics and connected devices for advanced classes.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-orange">
+        <time>03:00 PM</time>
+        <div><h4>Designing Your Own Lesson</h4><p>Leave with a lesson plan you can run in your own classroom the following week.</p></div>
+      </div>
+    </div>
+
+    <div class="day-panel" id="day3">
+      <div class="agenda-block block block-notch-right ab-mint">
+        <time>09:30 AM</time>
+        <div><h4>Curriculum Mapping</h4><p>Fitting AI and coding into CBSE/ICSE-aligned lesson plans across grades 1–10.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-violet">
+        <time>11:30 AM</time>
+        <div><h4>School Partnership Track</h4><p>Principals and coordinators meet the STEMpedia team to plan next year's rollout.</p></div>
+      </div>
+      <div class="agenda-block block block-notch-right ab-cyan">
+        <time>02:00 PM</time>
+        <div><h4>Certification & Closing</h4><p>Assessment, certificate distribution, and a wrap-up on what happens after today.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="takeaways">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What you leave with</div>
+      <h2>More than a certificate</h2>
+    </div>
+    <div class="takeaway-row">
+      <div class="takeaway"><div class="dot" style="background:var(--cyan);"></div><h3>Certified AI & Coding Educator Badge</h3><p>A shareable credential recognising you as equipped to teach AI and coding in your classroom.</p></div>
+      <div class="takeaway"><div class="dot" style="background:var(--orange);"></div><h3>Free Platform Trial for Your School</h3><p>Bring PictoBlox back to your classroom with a trial period to pilot with your own students.</p></div>
+      <div class="takeaway"><div class="dot" style="background:var(--mint);"></div><h3>A Ready-to-Teach Lesson Plan</h3><p>Walk out with a lesson you designed yourself during the conclave, ready for Monday morning.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="attend">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Who it's for</div>
+      <h2>Built for the people who run a classroom</h2>
+    </div>
+    <div class="attend-row">
+      <div class="chip">School Principals</div>
+      <div class="chip">Computer Science Teachers</div>
+      <div class="chip">STEM Coordinators</div>
+      <div class="chip">Academic Heads</div>
+      <div class="chip">ICT In-Charges</div>
+      <div class="chip">Activity Center Leads</div>
+    </div>
+  </div>
+</section>
+
+<section id="voices">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">From past programs</div>
+      <h2>What educators say about training with us</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="quote"><p>"Hands-on from the first hour — I left knowing exactly what to run in my own classroom."</p><span>Computer Science Teacher, Delhi NCR</span></div>
+      <div class="quote"><p>"No coding background needed, truly. My principal has already asked me to lead the rollout."</p><span>STEM Coordinator, Pune</span></div>
+      <div class="quote"><p>"The clearest explanation of classroom AI I've sat through — practical, not theoretical."</p><span>Academic Head, Bengaluru</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Good to know</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div style="margin-top:30px; max-width:760px;">
+      <details class="faq-item">
+        <summary>Do I need any coding background to attend?</summary>
+        <p>No. The conclave is built for first-time coders — every activity starts from block-based coding before touching any code.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I attend on behalf of my school without a principal?</summary>
+        <p>Yes — teachers, coordinators and ICT in-charges are all welcome. We simply ask that a decision-maker join the Day 3 partnership track if possible.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a cost to attend?</summary>
+        <p>Registration details and any applicable fees will be shared once you reserve your seat below.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What do I need to bring?</summary>
+        <p>Just a laptop. PictoBlox runs without any special hardware for the core sessions.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="register">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--cyan);">Seats are limited</div>
+    <h2>Bring AI and coding into your classroom this year.</h2>
+    <p>Reserve your seat at the AI Education Teachers Conclave and walk out with a certificate, a lesson plan, and a platform trial for your school.</p>
+    <a href="#" class="btn btn-primary">Reserve Your Seat</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>STEMpedia — AI Education Teachers Conclave</div>
+    <div>thestempedia.com</div>
+  </div>
+</footer>
+
+<script>
+function showDay(n, el){
+  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('day'+n).classList.add('active');
+}
+</script>
+
+</body>
+</html>
