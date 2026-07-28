@@ -19,5 +19,8 @@ A landing page for STEMpedia's 3-day AI Education Teachers Conclave, designed fo
 
 ## Deployment
 
-Live at: [https://ai-event-conclave.vercel.app](https://ai-event-conclave.vercel.app)
+Live at: [https://ai-education-conclave.vercel.app](https://ai-education-conclave.vercel.app)
+
+## GitHub Repository
+[https://github.com/Hemant-sahu-creator/AI-Event-Conclave](https://github.com/Hemant-sahu-creator/AI-Event-Conclave)
 
