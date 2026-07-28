@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/ai_index.html"
+      "destination": "/index.html"
     }
   ]
 }
